@@ -1,11 +1,45 @@
 {
-  "name": "wdio-browserstack-reporter",
-  "version": "0.1.0",
-  "description": "A WebdriverIO plugin which enables BrowserStack reports on CI servers",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_args": [
+    [
+      "wdio-browserstack-reporter@0.1.1",
+      "/Users/chimi/stack/lang/webdriverio/wdio_test/webdriverio-sample"
+    ]
+  ],
+  "_development": true,
+  "_from": "wdio-browserstack-reporter@0.1.1",
+  "_id": "wdio-browserstack-reporter@0.1.1",
+  "_inBundle": false,
+  "_integrity": "sha512-52vd7bv2yR/PpIqhaguBBH8NanGqpsFnRO4Ze+BPLnz6QR0SR7KAJ0xgpcFcXVHV6r4Eev1qGdKnUkuaSaooDw==",
+  "_location": "/wdio-browserstack-reporter",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "wdio-browserstack-reporter@0.1.1",
+    "name": "wdio-browserstack-reporter",
+    "escapedName": "wdio-browserstack-reporter",
+    "rawSpec": "0.1.1",
+    "saveSpec": null,
+    "fetchSpec": "0.1.1"
   },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/wdio-browserstack-reporter/-/wdio-browserstack-reporter-0.1.1.tgz",
+  "_spec": "0.1.1",
+  "_where": "/Users/chimi/stack/lang/webdriverio/wdio_test/webdriverio-sample",
+  "author": {
+    "name": "BrowserStack"
+  },
+  "bugs": {
+    "url": "https://github.com/browserstack/wdio-browserstack-reporter/issues"
+  },
+  "dependencies": {
+    "junit-report-builder": "^1.3.1",
+    "xmlbuilder": "^10.0.0"
+  },
+  "description": "A WebdriverIO plugin which enables BrowserStack reports on CI servers",
+  "homepage": "https://github.com/browserstack/wdio-browserstack-reporter#readme",
   "keywords": [
     "webdriveio",
     "browserstack",
@@ -16,14 +50,15 @@
     "teamcity",
     "bamboo"
   ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "wdio-browserstack-reporter",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/browserstack/wdio-browserstack-reporter.git"
   },
-  "author": "BrowserStack",
-  "license": "ISC",
-  "dependencies": {
-    "junit-report-builder": "^1.3.1",
-    "xmlbuilder": "^10.0.0"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.1.1"
 }

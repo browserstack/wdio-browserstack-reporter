@@ -1,10 +1,9 @@
-let util = require('util'), 
-  events = require('events'),
-  path = require('path'),
+let path = require('path'),
   fs = require('fs'),
   mkdirp = require('mkdirp');
 
 const WdioReporter = require('@wdio/reporter').default;
+const Launcher = require('@wdio/cli').default;
 
 class BrowserStackReporter extends WdioReporter {
 
@@ -13,128 +12,91 @@ class BrowserStackReporter extends WdioReporter {
     super(options)
   }
 
-  onRunnerStart(runner) {
-    console.log("====================onRunnerStart");
-  } 
+  onRunnerStart(runner) {} 
 
-  onBeforeCommand(runner) {
-    console.log("====================onBeforeCommand");
-  } 
+  onBeforeCommand(runner) {} 
 
-  onAfterCommand(runner) {
-    console.log("====================onAfterCommand");
-  } 
+  onAfterCommand(runner) {} 
 
-  onScreenshot(runner) {
-    console.log("====================onScreenshot");
-  } 
+  onScreenshot(runner) {} 
 
-  onSuiteStart(runner) {
-    console.log("====================onSuiteStart");
-  } 
+  onSuiteStart(runner) {} 
 
-  onHookStart(runner) {
-    console.log("====================onHookStart");
-  } 
+  onHookStart(runner) {} 
 
-  onHookEnd(runner) {
-    console.log("====================onHookEnd");
-  } 
+  onHookEnd(runner) {} 
 
-  onTestStart(runner) {
-    console.log("====================onTestStart");
-  } 
+  onTestStart(runner) {} 
 
-  onTestPass(runner) {
-    console.log("====================onTestPass");
-  } 
+  onTestPass(runner) {} 
 
-  onTestFail(runner) {
-    console.log("====================onTestFail");
-  } 
+  onTestFail(runner) {} 
 
-  onTestSkip(runner) {
-    console.log("====================onTestSkip");
-  } 
+  onTestSkip(runner) {} 
 
-  onTestEnd(runner) {
-    console.log("====================onTestEnd");
-  } 
+  onTestEnd(runner) {} 
 
-  onSuiteEnd(runner) {
-    console.log("====================onSuiteEnd");
-  } 
+  onSuiteEnd(runner) {}
 
   onRunnerEnd(runner) {
-    console.log("====================onRunnerEnd");
+
+    var sessionId = runner.sessionId;
+    var sepcs = runner.specs;
+    var specPathStringArray = sepcs[0].split("/");
+    var specNameWithExtension = specPathStringArray[specPathStringArray.length - 1]
+    var specName = specNameWithExtension.substring(0, specNameWithExtension.lastIndexOf("."));
+
+    const xml = this.prepareXml(runner)
+    let filename = 'REPORT-browserstack.'+sessionId+'.xml'
+    this.write(filename, xml)
+
   } 
 
-  onComplete(runner){
-    console.log("==================== onComplete ++++++ +++ ");
-  }
-
-
-  // onAfterCommand(runner) {
-  //   // this.onSingleFileOutput();
-  //   console.log("====================onAfterCommand");
-  // } 
+  onComplete(runner){}
 
   onSingleFileOutput () {
-    // console.log('==>> THIS dump :: ' + JSON.stringify(this));
-    // console.log('');
-    // console.log('====================== this.runnerStat :: ' + JSON.stringify(this.runnerStat));
     const xml = this.prepareXml(this.runnerStat)
     let filename = `REPORT-browserstack.all.xml`
     this.write(filename, xml)
-  } // FUNC onSingleFileOutput END
+  }
   
   prepareName(name = 'Skipped test') {
     return name.split(/[^a-zA-Z0-9]+/).filter(
       (item) => item && item.length
     ).join('_')
-  } // FUNC prepareName END
+  }
 
-  prepareXml(runners){
+  prepareXml(runner){
+
+    let thisRunner = this;
+    let sessionId = runner.sessionId;
+
     var xmlbuilder = require('xmlbuilder');
     const builder = xmlbuilder.create('testsuites', {encoding: 'UTF-8', allowSurrogateChars: true})
-    var testCaseIndex = 0;
-    // console.log('====================== NEW prepareXml runners :: ' + JSON.stringify(runners));
-    for (const key of Object.keys(runners)) {
-      // console.log('=================>>> NEW key :: ' + key);
-      const capabilities = runners[key]
-      // console.log('=================>>> NEW prepareXml capabilities :: ' + JSON.stringify(capabilities));
-      // console.log('=================>>> NEW prepareXml options :: ' + JSON.stringify(this.options));
-      const packageName = this.options.packageName 
-          ? `${capabilities.sanitizedCapabilities}-${this.options.packageName}`
-          : capabilities.sanitizedCapabilities
-      for (let specId of Object.keys(capabilities.specs)) {
-        const spec = capabilities.specs[specId]
+    
+    for (let keySuites of Object.keys(thisRunner.suites)) {
 
-        for (let suiteKey of Object.keys(spec.suites)) {
-          if (suiteKey.match(/^"before all"/)) {
-            continue
-          }
+      let suite = thisRunner.suites[keySuites];
+      let suiteTitle = suite.title;
+      let suiteFullTitle = suite.fullTitle;
+      
+      const suiteNameForXML = this.prepareName(suite.title);
+      const testSuiteForXML = builder.ele("testsuite", {name: suiteNameForXML});
 
-          const suite = spec.suites[suiteKey]
-          const suiteName = this.prepareName(suite.title)
-          const testSuite = builder.ele("testsuite", {name: suiteName})
+      for (let keyTests of Object.keys(suite.tests)) {
 
-          for (let testKey of Object.keys(suite.tests)) {
-            if (testKey !== 'undefined') { 
-              const test = suite.tests[testKey]
-              const testName = this.prepareName(test.title)
-              const testCase = testSuite.ele("testcase",{name: testName, id: `${suiteName}.${testName}{0}`, index: 0 });
-              testCase.ele("session", {}, runners[key].sessionID);
-              if (test.state === 'pending') {
-                testCase.skipped()
-              }
-            }
-          }
-        }
+        let tests = suite.tests[keyTests];
+        let testsTitle = tests.title;
+        let testsFullTitle = tests.fullTitle;
+
+        const testNameForXML = this.prepareName(testsTitle);
+        const testCaseForXML = testSuiteForXML.ele("testcase",{name: testNameForXML, id: `${suiteFullTitle}.${testNameForXML}{0}`, index: 0 });
+        testCaseForXML.ele("session", {}, sessionId);
+
       }
     }
     return builder.end({ pretty: true});
-  } // FUNC prepareXml END
+  }
 
   write(filename, xml) {
 
@@ -154,7 +116,7 @@ class BrowserStackReporter extends WdioReporter {
       console.log(`Failed to write xunit report "${filename}"
        to [${outputDir}]. Error: ${e}`)
     }
-  } // FUNC write END
+  }
 
 }
 
