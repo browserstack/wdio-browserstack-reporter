@@ -47,7 +47,7 @@ class BrowserStackReporter extends WdioReporter {
     var specName = specNameWithExtension.substring(0, specNameWithExtension.lastIndexOf("."));
 
     const xml = this.prepareXml(runner)
-    let filename = 'REPORT-'+sessionId+'.xml'
+    let filename = 'REPORT-browserstack.all.xml'
     this.write(filename, xml)
 
   } 
