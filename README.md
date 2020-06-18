@@ -11,7 +11,7 @@ Add `wdio-browserstack-reporter` as a dependency in your `package.json`.
 ```json
 {
   "dependencies": {
-    "wdio-browserstack-reporter": "browserstack/wdio-browserstack-reporter#wdio5"
+    "wdio-browserstack-reporter": "git+https://github.com/browserstack/wdio-browserstack-reporter.git#wdio5"
   }
 }
 ```
