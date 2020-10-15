@@ -27,6 +27,6 @@
     "xmlbuilder": "^10.0.0"
   },
   "peerDependencies": {
-    "@wdio/cli": "^5.0.0"
+    "@wdio/cli": ">=5.0.0"
   }
 }
