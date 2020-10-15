@@ -1,6 +1,6 @@
 # wdio-browserstack-reporter
 
-The master branch contains reporter for **WebdriverIO 4**, for **WebdriverIO 5** and **WebdriverIO 6** please refer to [wdio-browserstack-reporter/wdio5](https://github.com/browserstack/wdio-browserstack-reporter/tree/wdio5)
+The branch contains reporter for **WebdriverIO 4**, for **WebdriverIO 5** and **WebdriverIO 6** please refer to [wdio-browserstack-reporter/wdio5](https://github.com/browserstack/wdio-browserstack-reporter/tree/wdio5)
 
 A WebdriverIO plugin which enables BrowserStack reports on CI servers
 
