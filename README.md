@@ -1,7 +1,6 @@
 # wdio-browserstack-reporter
 
-A WebdriverIO plugin for v5 and v6 which enables BrowserStack reports on CI servers. For v4 please refer to branch wdio4.
-
+The branch contains reporter for **WebdriverIO 5** and **WebdriverIO 6**, for v4 please refer to [wdio-browserstack-reporter/wdio4](https://github.com/browserstack/wdio-browserstack-reporter/tree/wdio4)
 ![Browserstack reports on Jenkins](screenshots/jenkins_report.png)
 
 ## Installation
