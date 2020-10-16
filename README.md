@@ -10,7 +10,7 @@ Add `wdio-browserstack-reporter` as a dependency in your `package.json`.
 ```json
 {
   "dependencies": {
-    "wdio-browserstack-reporter": "browserstack/wdio-browserstack-reporter#wdio5"
+    "wdio-browserstack-reporter": "^1.0.0"
   }
 }
 ```
