@@ -1,6 +1,6 @@
 # wdio-browserstack-reporter
 
-The branch contains reporter for **WebdriverIO 5** and **WebdriverIO 6**, for v4 please refer to [wdio-browserstack-reporter/wdio4](https://github.com/browserstack/wdio-browserstack-reporter/tree/wdio4)
+The branch contains reporter for **WebdriverIO 5** and later versions. For earlier versions please refer to [wdio-browserstack-reporter/wdio4](https://github.com/browserstack/wdio-browserstack-reporter/tree/wdio4)
 ![Browserstack reports on Jenkins](screenshots/jenkins_report.png)
 
 ## Installation
