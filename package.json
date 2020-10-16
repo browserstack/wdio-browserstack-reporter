@@ -1,6 +1,6 @@
 {
   "name": "wdio-browserstack-reporter",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A WebdriverIO plugin which enables BrowserStack reports on CI servers",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,6 @@
     "xmlbuilder": "^10.0.0"
   },
   "peerDependencies": {
-    "@wdio/cli": "^4.0.0"
+    "@wdio/cli": ">=5.0.0"
   }
 }
