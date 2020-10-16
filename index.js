@@ -6,6 +6,7 @@ var util = require('util'),
 
 var BrowserStackReporter = function(baseReporter, config, options = {}) {
 
+  var _this = this
   this.baseReporter = baseReporter
   this.config = config
   this.options = options
@@ -69,8 +70,8 @@ var BrowserStackReporter = function(baseReporter, config, options = {}) {
   function write(filename, xml) {
 
     var outputDir = "."
-    if (this.options && typeof this.options.outputDir == 'string') {
-      outputDir = this.options.outputDir
+    if (_this.options && typeof _this.options.outputDir == 'string') {
+      outputDir = _this.options.outputDir
     }
     outputDir = `${outputDir}/browserstack-reports`
 
