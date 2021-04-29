@@ -48,6 +48,7 @@ var BrowserStackReporter = function(baseReporter, config, options = {}) {
           const suite = spec.suites[suiteKey]
           const suiteName = prepareName(suite.title)
           const testSuite = builder.ele("testsuite", {name: suiteName})
+          const projectType = capabilities.capabilities && capabilities.capabilities.app ? "APP_AUTOMATE" : "AUTOMATE";
 
           for (let testKey of Object.keys(suite.tests)) {
             if (testKey !== 'undefined') { 
@@ -55,6 +56,7 @@ var BrowserStackReporter = function(baseReporter, config, options = {}) {
               const testName = prepareName(test.title)
               const testCase = testSuite.ele("testcase",{name: testName, id: `${suiteName}.${testName}{0}`, index: 0 });
               testCase.ele("session", {}, runners[key].sessionID);
+              testCase.ele("projectType", {}, projectType);
               if (test.state === 'pending') {
                 testCase.skipped()
               }
