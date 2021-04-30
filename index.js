@@ -37,6 +37,7 @@ class BrowserStackReporter extends WdioReporter {
   prepareXml(runner) {
     let thisRunner = this;
     let sessionId = runner.sessionId;
+    let projectType = runner.capabilities && runner.capabilities.bundleID ? "APP_AUTOMATE" : "AUTOMATE";
 
     var xmlbuilder = require("xmlbuilder");
     const builder = xmlbuilder.create("testsuites", {
@@ -66,6 +67,7 @@ class BrowserStackReporter extends WdioReporter {
           index: 0
         });
         testCaseForXML.ele("session", {}, sessionId);
+        testCaseForXML.ele("projectType", {}, projectType); // This variable is required in Azure plugin for App Automate
       }
     }
     return builder.end({ pretty: true });
