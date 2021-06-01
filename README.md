@@ -22,14 +22,11 @@ Add `browserstack` as a reporter in your conf file.
 ```js
 // wdio.conf.js
 module.exports = {
-  // ...
-  reporters: ["browserstack"],
-  reporterOptions: {
-    browserstack: {
-      outputDir: "./"
-    }
-  }
-  // ...
+    // ...
+    reporters: [['browserstack', {
+        outputDir: './output_dir'
+    }]],
+    // ...
 };
 ```
 
