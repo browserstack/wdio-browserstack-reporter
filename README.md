@@ -22,14 +22,11 @@ Add `browserstack` as a reporter in your conf file.
 ```js
 // wdio.conf.js
 module.exports = {
-  // ...
-  reporters: ["browserstack"],
-  reporterOptions: {
-    browserstack: {
-      outputDir: "./"
-    }
-  }
-  // ...
+    // ...
+    reporters: [['browserstack', {
+        outputDir: './output_dir'
+    }]],
+    // ...
 };
 ```
 
@@ -37,7 +34,7 @@ The following options are supported(optional):
 
 ### outputDir
 
-Define a directory where your browserstack report files should get stored.
+Define a directory where your browserstack report files should get stored. The report files will be stored in ./output_dir/browserstack-reports
 
 Type: `String`<br>
 
